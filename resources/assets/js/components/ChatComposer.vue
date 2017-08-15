@@ -16,7 +16,9 @@ export default {
         sendMessage(){
             this.$emit('messagesent',{
                 message: this.messageText,
-                user: "Endigo"
+                user: {
+                    name:"Endigo"
+                }
             });
             this.messageText = '';
         }

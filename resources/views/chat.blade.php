@@ -1,21 +1,16 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@extends('layouts.app')
 
-    <title>Chat room</title>
-    <link rel="stylesheet" href="css/app.css">
+@section('content')
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Chatroom</div>
 
-</head>
-<body>
-    <div id="app">
-        <h1>Chatroom</h1>
-        <chat-log :messages="messages"></chat-log>
-        <chat-composer v-on:messagesent="addMessage"></chat-composer>
+                <div class="panel-body" id="app">
+                    <chat-log :messages="messages"></chat-log>
+                    <chat-composer v-on:messagesent="addMessage"></chat-composer>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="js/app.js" charset="UTF-8"></script>
-</body>
-</html>
+@endsection

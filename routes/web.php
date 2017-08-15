@@ -1,5 +1,5 @@
 <?php
-
+use App\Message;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +17,19 @@ Route::get('/', function () {
 
 Route::get('/chat', function () {
     return view('chat');
+})->middleware('auth');
+
+Route::get('/messages', function (){
+   return Message::with('user')->get();
+});
+
+Route::post('/messages', function (){
+    $user = auth()->user();
+    $user->messages()->create([
+       'message' => request()->get('message')
+    ]);
+
+    return ['status' => 'OK'];
 });
 
 Auth::routes();
