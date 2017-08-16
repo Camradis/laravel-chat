@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Events;
-
 use App\Message;
 use App\User;
 use Illuminate\Broadcasting\Channel;
@@ -11,12 +9,20 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-
-class MessagePosted
+class MessagePosted implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    /**
+     * Message
+     *
+     * @var Message
+     */
     public $message;
+    /**
+     * User
+     *
+     * @var User
+     */
     public $user;
     /**
      * Create a new event instance.
@@ -28,7 +34,6 @@ class MessagePosted
         $this->message = $message;
         $this->user = $user;
     }
-
     /**
      * Get the channels the event should broadcast on.
      *
@@ -36,6 +41,6 @@ class MessagePosted
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PresenceChannel('chatroom');
     }
 }
